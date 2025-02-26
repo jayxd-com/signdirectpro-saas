@@ -18,7 +18,7 @@ export default ({ children, breadcrumbs, ...props }: MemberLayoutProps) => (
                     <div className="flex flex-row items-center space-x-2"><AppLogoIconImage className="w-8" /><h1 className="font-bold">Sign Direct Pro</h1></div>
                 </div>
                 <div className="flex flex-row h-full">
-                    <Link href="#" className="bg-white rounded-md shadow w-16 h-full flex flex-col justify-center items-center py-2 px-4" >
+                    <Link href={route('member.product.show', 1)} className="bg-white rounded-md shadow w-16 h-full flex flex-col justify-center items-center py-2 px-4" >
                         <img className="w-full" src="/images/icons/banner/flexible.svg" alt="Flexible "/>
                         <span className="text-sm">Banner</span>
                     </Link>

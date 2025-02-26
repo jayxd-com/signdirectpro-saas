@@ -14,7 +14,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
-    Route::prefix('member')->name('.member')->group(function () {
+    Route::prefix('member')->name('member.')->group(function () {
         Route::get('dashboard', function () {
             return Inertia::render('member/dashboard');
         })->name('dashboard');
