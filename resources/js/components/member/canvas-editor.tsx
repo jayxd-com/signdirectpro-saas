@@ -50,39 +50,40 @@ export default function CanvasEditor() {
     const widthToHeightRatio = biggerDimension/smallerDimension;
 
 
-
-
-
-
-    // const [canvasWidth, setCanvasWidth] = useState(1);
-    // const [canvasHeight, setCanvasHeight] = useState(1);
+    const [canvasWidth, setCanvasWidth] = useState(1);
+    const [canvasHeight, setCanvasHeight] = useState(1);
 
     const possibleGridSizeMuliples = [1,2,4,8,12,16,20,24];
     // const gridSize = scaleFactor * (biggerDimension/12) ;
 
     const [gridSize, setGridSize] = useState(0);
+    // const canvasWidth = canvasWidthInput * scaleFactor;
+    // const canvasHeight = canvasHeightInput * scaleFactor;
+    useEffect(() => {
+        console.log('runnnnnnnnnnn', canvasWidthInput);
+        setCanvasWidth(canvasWidthInput * scaleFactor);
+        setCanvasHeight(canvasHeightInput * scaleFactor);
+    }, [canvasWidthInput, canvasHeightInput]);
 
 
-    const canvasWidth = canvasWidthInput * scaleFactor;
-    const canvasHeight = canvasHeightInput * scaleFactor;
 
     // const [gridSize, setGridSize] = useState(80);
 
-    const [baseGridSize, setBaseGridSize] = useState(0)
-
-    const [defaultInchToGrid, setDefaultInchToGrid] = useState(4);
-
-    const [heightGreaterThanWidth, setHeightGreaterThanWidth] = useState(false);
-
-    const [widthToGrid, setWidthToGrid] = useState(4);
-    const [heightToGrid, setHeightToGrid] = useState(4);
+    // const [baseGridSize, setBaseGridSize] = useState(0)
+    //
+    // const [defaultInchToGrid, setDefaultInchToGrid] = useState(4);
+    //
+    // const [heightGreaterThanWidth, setHeightGreaterThanWidth] = useState(false);
+    //
+    // const [widthToGrid, setWidthToGrid] = useState(4);
+    // const [heightToGrid, setHeightToGrid] = useState(4);
 
 
 
 
     console.log('scale factor: ', scaleFactor);
 
-    const [gridUnit, setGridUnit] = useState("inch")
+    // const [gridUnit, setGridUnit] = useState("inch")
 
 
     // Canvas Container
@@ -95,8 +96,12 @@ export default function CanvasEditor() {
             gsScale = 12
         }
 
+        console.log('biggerDimension', biggerDimension);
+
         // setGridSize(scaleFactor * widthToHeightRatio);
-        setGridSize(((scaleFactor * biggerDimension)/biggerDimension) * 8);
+        setGridSize(((scaleFactor * biggerDimension )/biggerDimension) * 12 );
+
+
         // console.log("grid sizee: ", (biggerDimension * gsScale) / (biggerDimension/12));
     }, [gridSize, scaleFactor]);
 
@@ -260,10 +265,9 @@ export default function CanvasEditor() {
 
 
     return (
-
         <>
             <div
-                className="absolute left-0 top-0 w-full h-full bg-center z-[-4] box-border select-none transform-gpu bg-white"
+                className="absolute top-0 left-0 z-[-4] box-border h-full w-full transform-gpu bg-white bg-center select-none"
                 style={{
                     backgroundSize: `${gridSize}px ${gridSize}px`,
                     backgroundImage: `
@@ -274,35 +278,59 @@ export default function CanvasEditor() {
                     transformOrigin: `${screenCenterX}px ${screenCenterY}px`,
                     transform: `scale(${scale})`,
                 }}
-            >
+            ></div>
 
-            </div>
-
-
-            <div className="absolute left-0 top-[85px] bottom-[280px] min-w-[480px] w-full bg-no-repeat box-border">
+            <div className="absolute top-[85px] bottom-[280px] left-0 box-border w-full min-w-[480px] bg-no-repeat">
                 {isContainerWidthGreaterThanHeight}
                 {/* Content here */}
 
-
-                <div className="flex flex-column justify-center  relative w-full h-full">
-                    <div id="canvas_container" ref={divRef}
-                         className=" w-full h-full min-h-full max-w-full perspective-[1200px] transition-[padding-left] duration-100 flex flex-grow justify-center items-center box-border user-select-none p-[60px_80px_140px_80px]">
+                <div className="flex-column relative flex h-full w-full justify-center">
+                    <div
+                        id="canvas_container"
+                        ref={divRef}
+                        className="user-select-none box-border flex h-full min-h-full w-full max-w-full flex-grow items-center justify-center p-[60px_80px_140px_80px] transition-[padding-left] duration-100 perspective-[1200px]"
+                    >
                         {/* Content here */}
 
                         <div
-                            className="bg-white relative border border-gray-400 shadow-lg bg-opacity-40"
+                            className="bg-opacity-40 relative border border-gray-400 bg-white shadow-lg"
                             style={{
                                 width: `${canvasWidth}px`,
                                 height: `${canvasHeight}px`,
-
                             }}
                         >
-                            <div className="absolute w-full h-3 -bottom-2 bg-amber-200">test</div>
+                            {/*bottom-[calc(50%-10px)] left-[calc(-50%-15px)]*/}
+                            <div className="absolute -left-7  h-full w-6 border-y-3 border-gray-300 border-dashed flex flex-row justify-center items-center"
+                                 style={{
+                                     background: `url(/images/arrows/dim-left-h.png) top no-repeat,
+                url(/images/arrows/dim-right-h.png) bottom no-repeat,
+                url(/images/arrows/dim-width-h.png) top repeat-y`
+                                 }}
+                            ><div className="text-center rotate-90 bg-white px-3">{canvasHeightInput}"</div></div>
+                            <div
+                                className="absolute -right-7 h-full w-6 border-y-3 border-gray-300 border-dashed flex flex-col justify-center items-center"
+                                style={{
+                                    background: `url(/images/arrows/dim-left-h.png) top no-repeat,
+                url(/images/arrows/dim-right-h.png) bottom no-repeat,
+                url(/images/arrows/dim-width-h.png) top repeat-y`
+                                }}
+                            >
+                                <div  className="text-center -rotate-90  bg-white px-3">{canvasHeightInput}"</div></div>
+                            <div
+                                className="absolute -top-7 h-6 w-full border-x-3 border-gray-300 border-dashed flex flex-row justify-center items-center"
+                                style={{
+                                    background: `url(/images/arrows/dim-left.png) top left no-repeat,
+                url(/images/arrows/dim-right.png) top right no-repeat,
+                url(/images/arrows/dim-width.png) top left repeat-x`
+                                }}
+                            >
+                                <div className="text-center inline-block bg-white px-3 mx-auto">{canvasWidthInput}"</div>
+                            </div>
+
+
+
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
 
@@ -321,8 +349,6 @@ export default function CanvasEditor() {
 
             {/*</div>*/}
 
-
-
             {/*<div*/}
             {/*    className="relative border border-gray-400 shadow-lg"*/}
             {/*    style={{*/}
@@ -335,8 +361,6 @@ export default function CanvasEditor() {
             {/*        {width}" x {height}"*/}
             {/*    </div>*/}
             {/*</div>*/}
-
-
         </>
     );
 }

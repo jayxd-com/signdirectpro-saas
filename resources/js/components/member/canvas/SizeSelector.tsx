@@ -89,11 +89,7 @@ export function CanvasSizeSelector() {
                                 onChange={(e) => handleInputChange(e, setHeightInch)}
                             />
                         </div>
-                        {/* Display Calculated Canvas Size */}
-                        <div className="text-sm text-muted-foreground">
-                            <p>Canvas Width: {canvasWidthInput} inches</p>
-                            <p>Canvas Height: {canvasHeightInput} inches</p>
-                        </div>
+
                     </div>
                 </div>
             </PopoverContent>

@@ -3,6 +3,7 @@ import { type BreadcrumbItem } from '@/types';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import AppLogoIconImage from '@/components/app-logo-icon-image';
 import { Link } from '@inertiajs/react';
+import * as React from 'react';
 
 interface MemberLayoutProps {
     children: React.ReactNode;
@@ -29,6 +30,11 @@ export default ({ children, breadcrumbs, ...props }: MemberLayoutProps) => (
             </div>
 
         </div>
-        {children}
+
+
+        <main className="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col gap-4 rounded-xl px-3 py-3" {...props}>
+            {children}
+        </main>
+
     </>
 );
